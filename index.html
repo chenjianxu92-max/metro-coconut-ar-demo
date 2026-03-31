@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>麦德龙椰子水 AR 溯源演示</title>
+    <style>
+:root {
+  color-scheme: light;
+  --bg-top: #eafaf5;
+  --bg-bottom: #97dfcd;
+  --ink: #123733;
+  --muted: rgba(18, 55, 51, 0.72);
+  --panel: rgba(255, 255, 255, 0.72);
+  --panel-border: rgba(255, 255, 255, 0.55);
+  --accent: #0d8774;
+  --accent-deep: #075a53;
+  --voucher-deep: #747b83;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.88), transparent 28%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  color: var(--ink);
+}
+
+body {
+  min-height: 100vh;
+}
+
+.shell {
+  width: min(100%, 480px);
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+  border-radius: 30px;
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 24px 80px rgba(15, 70, 64, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.panel--intro {
+  padding: 24px 20px 22px;
+}
+
+.brand-pill,
+.signal-badge,
+.eyebrow,
+.origin-line span,
+.voucher-topline span,
+.voucher-footer span {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-pill,
+.signal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(13, 135, 116, 0.12);
+  color: var(--accent-deep);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.eyebrow {
+  margin: 18px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 34px;
+  line-height: 1.05;
+}
+
+.lead {
+  margin-top: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.82), rgba(236, 252, 248, 0.58)),
+    rgba(255, 255, 255, 0.42);
+}
+
+.packshot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cap {
+  width: 58px;
+  height: 26px;
+  border-radius: 12px 12px 9px 9px;
+  background:
+    repeating-linear-gradient(90deg, #f7fbfb 0, #f7fbfb 5px, #dee6e7 5px, #dee6e7 7px);
+  box-shadow: 0 6px 18px rgba(27, 69, 65, 0.12);
+}
+
+.carton {
+  position: relative;
+  width: 122px;
+  height: 310px;
+  margin-top: -2px;
+  border-radius: 18px 18px 14px 14px;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.68), transparent 32%),
+    linear-gradient(180deg, #acefe8 0%, #51e0c8 54%, #17c1aa 100%);
+  box-shadow:
+    inset -14px 0 20px rgba(7, 83, 74, 0.1),
+    0 20px 32px rgba(15, 86, 76, 0.22);
+}
+
+.carton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 86% 20%, rgba(255, 255, 255, 0.3), transparent 16%),
+    linear-gradient(160deg, transparent 20%, rgba(255, 255, 255, 0.26) 40%, transparent 45%);
+}
+
+.coconut {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 26% 26%, #c5f779 0, #7ac134 58%, #5d9f1f 100%);
+  box-shadow: inset -8px -10px 16px rgba(58, 106, 15, 0.38);
+}
+
+.coconut--left {
+  top: 24px;
+  left: -12px;
+  width: 62px;
+  height: 62px;
+}
+
+.coconut--right {
+  top: 28px;
+  right: -14px;
+  width: 68px;
+  height: 86px;
+  transform: rotate(14deg);
+  border-radius: 50% 48% 50% 46%;
+}
+
+.roundel {
+  position: absolute;
+  left: 50%;
+  top: 126px;
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #2f3d3d;
+  text-align: center;
+  box-shadow: 0 10px 18px rgba(29, 63, 56, 0.18);
+}
+
+.roundel span {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.roundel strong {
+  width: 76px;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.nfc-label {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 42px;
+  text-align: center;
+  color: rgba(235, 255, 248, 0.85);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.product-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.origin-line {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.origin-line span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.origin-line strong {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.primary-btn,
+.ghost-btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.primary-btn {
+  flex: 1;
+  padding: 15px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0f8e7d, #0a6359);
+  color: #f5fffc;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 18px 28px rgba(13, 135, 116, 0.28);
+}
+
+.ghost-btn {
+  padding: 15px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--accent-deep);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ghost-btn--small {
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.primary-btn:hover,
+.ghost-btn:hover {
+  transform: translateY(-1px);
+}
+
+.disclaimer {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.panel--experience {
+  padding: 18px 16px 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.experience-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+h2 {
+  margin-top: 8px;
+  font-size: 30px;
+  line-height: 1.08;
+}
+
+.scene {
+  position: relative;
+  height: 620px;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #6be5ef 0%, #97f0d1 36%, #50bea2 100%);
+  box-shadow: inset 0 -40px 60px rgba(7, 64, 64, 0.18);
+}
+
+.scene > * {
+  position: absolute;
+}
+
+.sun-halo {
+  top: 38px;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 243, 188, 0.95) 0, rgba(255, 243, 188, 0.45) 30%, transparent 66%);
+  filter: blur(6px);
+  animation: pulse 4.6s ease-in-out infinite;
+}
+
+.sky-layer {
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(255, 255, 255, 0.68), transparent 24%),
+    radial-gradient(circle at 78% 20%, rgba(255, 255, 255, 0.5), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 56%);
+}
+
+.mist-layer {
+  inset-inline: -10%;
+  height: 120px;
+  border-radius: 50%;
+  filter: blur(12px);
+  background: rgba(238, 255, 248, 0.42);
+  animation: drift 14s linear infinite;
+}
+
+.mist-layer--back {
+  top: 130px;
+}
+
+.mist-layer--front {
+  bottom: 190px;
+  background: rgba(244, 255, 252, 0.32);
+  animation-duration: 18s;
+}
+
+.mountain {
+  bottom: 218px;
+  width: 58%;
+  height: 180px;
+  background: linear-gradient(180deg, rgba(20, 104, 92, 0.38), rgba(10, 63, 56, 0.68));
+  clip-path: polygon(0 100%, 18% 56%, 34% 68%, 53% 24%, 67% 52%, 100% 100%);
+}
+
+.mountain--left {
+  left: -8%;
+}
+
+.mountain--right {
+  right: -6%;
+  transform: scaleX(-1) translateY(18px);
+}
+
+.water-layer {
+  inset-inline: 0;
+  bottom: 0;
+  height: 240px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 24%),
+    radial-gradient(circle at 25% 16%, rgba(255, 255, 255, 0.2), transparent 16%),
+    repeating-linear-gradient(180deg, rgba(115, 255, 240, 0.28) 0, rgba(115, 255, 240, 0.28) 6px, rgba(14, 129, 110, 0.1) 6px, rgba(14, 129, 110, 0.1) 16px),
+    linear-gradient(180deg, rgba(28, 142, 126, 0.12), rgba(6, 92, 83, 0.84));
+  animation: shimmer 6s linear infinite;
+}
+
+.island {
+  left: 50%;
+  bottom: 156px;
+  width: 300px;
+  height: 128px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.16), transparent 22%),
+    linear-gradient(180deg, #2f8c54 0%, #155639 100%);
+  box-shadow:
+    0 18px 24px rgba(8, 53, 45, 0.2),
+    inset 0 20px 28px rgba(162, 235, 171, 0.3);
+}
+
+.palm {
+  bottom: 132px;
+  width: 170px;
+  height: 280px;
+  animation: sway 5.4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.palm--left {
+  left: 48px;
+}
+
+.palm--right {
+  right: 44px;
+  animation-delay: -1.4s;
+}
+
+.trunk {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 18px;
+  height: 180px;
+  transform: translateX(-50%) skewX(-8deg);
+  transform-origin: bottom center;
+  border-radius: 16px;
+  background: repeating-linear-gradient(180deg, #80552f 0, #80552f 11px, #9f7147 11px, #9f7147 18px);
+  box-shadow: inset -4px 0 7px rgba(67, 34, 19, 0.36);
+}
+
+.leaf {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  width: 120px;
+  height: 34px;
+  background: linear-gradient(90deg, #9ef780 0%, #40b85a 100%);
+  border-radius: 90% 0 90% 0;
+  transform-origin: 0 50%;
+  box-shadow: inset -7px -3px 8px rgba(29, 103, 34, 0.28);
+}
+
+.leaf-1 {
+  transform: rotate(-32deg);
+}
+
+.leaf-2 {
+  transform: rotate(-5deg);
+}
+
+.leaf-3 {
+  transform: rotate(18deg);
+}
+
+.leaf-4 {
+  transform: rotate(42deg);
+}
+
+.leaf-5 {
+  transform: rotate(66deg);
+}
+
+.floating-card {
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 42px);
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 22px;
+  background: rgba(6, 44, 40, 0.24);
+  color: #eefef9;
+  box-shadow: 0 16px 42px rgba(3, 28, 26, 0.22);
+  backdrop-filter: blur(12px);
+}
+
+.origin-card {
+  top: 26px;
+  animation: float 4.2s ease-in-out infinite;
+}
+
+.origin-card p,
+.origin-card span {
+  color: rgba(238, 254, 249, 0.82);
+  font-size: 13px;
+}
+
+.origin-card strong {
+  display: block;
+  margin: 8px 0 6px;
+  font-size: 22px;
+}
+
+.scan-reticle {
+  left: 50%;
+  top: 53%;
+  width: 210px;
+  height: 210px;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(222, 255, 249, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 0 0 999px rgba(5, 34, 31, 0.06), 0 0 28px rgba(193, 255, 241, 0.25);
+}
+
+.scan-reticle::before,
+.scan-reticle::after {
+  content: "";
+  position: absolute;
+  inset-inline: 20px;
+  height: 2px;
+  background: rgba(231, 255, 250, 0.9);
+  animation: scanline 2.6s ease-in-out infinite;
+}
+
+.scan-reticle::before {
+  top: 32px;
+}
+
+.scan-reticle::after {
+  top: 172px;
+  animation-delay: -1.3s;
+}
+
+.particles {
+  inset: 0;
+}
+
+.particles span {
+  position: absolute;
+  bottom: -24px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.54);
+  animation: bubble 7s linear infinite;
+}
+
+.particles span:nth-child(1) {
+  left: 14%;
+  animation-delay: 0s;
+}
+
+.particles span:nth-child(2) {
+  left: 28%;
+  animation-delay: -1.2s;
+}
+
+.particles span:nth-child(3) {
+  left: 44%;
+  animation-delay: -2.5s;
+}
+
+.particles span:nth-child(4) {
+  left: 58%;
+  animation-delay: -3.7s;
+}
+
+.particles span:nth-child(5) {
+  left: 74%;
+  animation-delay: -1.9s;
+}
+
+.particles span:nth-child(6) {
+  left: 86%;
+  animation-delay: -4.1s;
+}
+
+.status-timeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0 8px;
+  color: var(--muted);
+}
+
+.timeline-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(18, 55, 51, 0.18);
+}
+
+.timeline-dot.is-live {
+  background: #17b997;
+  box-shadow: 0 0 0 10px rgba(23, 185, 151, 0.12);
+}
+
+.voucher {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 24px;
+  border: 1px dashed rgba(118, 126, 136, 0.5);
+  background:
+    linear-gradient(135deg, rgba(239, 242, 245, 0.96), rgba(214, 220, 225, 0.9)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+}
+
+.voucher-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--voucher-deep);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.voucher-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.voucher-type {
+  color: var(--voucher-deep);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.voucher-body h3 {
+  margin-top: 8px;
+  color: #51575d;
+  font-size: 30px;
+  line-height: 1.04;
+}
+
+.voucher-desc {
+  margin-top: 10px;
+  color: #667079;
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.voucher-stamp {
+  align-self: center;
+  min-width: 86px;
+  padding: 14px 10px;
+  border: 2px solid rgba(108, 116, 126, 0.44);
+  border-radius: 18px;
+  color: rgba(108, 116, 126, 0.84);
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  transform: rotate(-12deg);
+}
+
+.voucher-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.tech-note {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 248, 230, 0.78);
+  color: #54442f;
+}
+
+.tech-note h3 {
+  font-size: 18px;
+}
+
+.tech-note ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  line-height: 1.65;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(0.96);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(-8%);
+  }
+  100% {
+    transform: translateX(8%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 0, 0 0, 0 120px, 0 0;
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+}
+
+@keyframes scanline {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes bubble {
+  0% {
+    transform: translateY(0) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-620px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .shell {
+    padding-inline: 10px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .product-card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .product-copy {
+    width: 100%;
+  }
+
+  .cta-row {
+    flex-direction: column;
+  }
+
+  .experience-header,
+  .voucher-topline,
+  .voucher-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .voucher-body {
+    flex-direction: column;
+  }
+
+  .voucher-stamp {
+    align-self: flex-start;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel panel--intro" id="introPanel">
+        <div class="brand-pill">METRO · NFC 椰子水</div>
+        <p class="eyebrow">AR 溯源演示原型</p>
+        <h1>扫描货架码后，进入泰国椰林溯源场景</h1>
+        <p class="lead">
+          这个原型模拟了用户在货架前扫码后的关键体验：产地场景被唤起、溯源信息浮现、5 秒后出现一张灰色待激活券。
+        </p>
+
+        <div class="product-card">
+          <div class="packshot">
+            <div class="cap"></div>
+            <div class="carton">
+              <div class="coconut coconut--left"></div>
+              <div class="coconut coconut--right"></div>
+              <div class="roundel">
+                <span>100%</span>
+                <strong>COCONUT WATER</strong>
+              </div>
+              <div class="nfc-label">NFC ORIGINAL IMPORT</div>
+            </div>
+          </div>
+
+          <div class="product-copy">
+            <div class="origin-line">
+              <span>原产地</span>
+              <strong>泰国 · 椰林产区</strong>
+            </div>
+            <div class="origin-line">
+              <span>扫码触发</span>
+              <strong>产地动画 + 灰色待激活券</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="primary-btn" id="startButton">开始 AR 溯源演示</button>
+          <button class="ghost-btn" id="resetButton" hidden>重新播放</button>
+        </div>
+
+        <p class="disclaimer">
+          当前为演示版。灰色券 UI 与节奏已实现；真实“微信卡包立即收券”需接入微信卡券 API、商户资质与签名流程。
+        </p>
+      </section>
+
+      <section class="panel panel--experience hidden" id="experiencePanel">
+        <div class="experience-header">
+          <div>
+            <p class="eyebrow">THAILAND TRACEABILITY</p>
+            <h2>泰国香水椰种植带</h2>
+          </div>
+          <div class="signal-badge">溯源识别成功</div>
+        </div>
+
+        <div class="scene">
+          <div class="sun-halo"></div>
+          <div class="sky-layer"></div>
+          <div class="mist-layer mist-layer--back"></div>
+          <div class="mountain mountain--left"></div>
+          <div class="mountain mountain--right"></div>
+          <div class="water-layer"></div>
+          <div class="mist-layer mist-layer--front"></div>
+          <div class="island"></div>
+          <div class="palm palm--left">
+            <span class="trunk"></span>
+            <span class="leaf leaf-1"></span>
+            <span class="leaf leaf-2"></span>
+            <span class="leaf leaf-3"></span>
+            <span class="leaf leaf-4"></span>
+            <span class="leaf leaf-5"></span>
+          </div>
+          <div class="palm palm--right">
+            <span class="trunk"></span>
+            <span class="leaf leaf-1"></span>
+            <span class="leaf leaf-2"></span>
+            <span class="leaf leaf-3"></span>
+            <span class="leaf leaf-4"></span>
+            <span class="leaf leaf-5"></span>
+          </div>
+          <div class="floating-card origin-card">
+            <p>原产地动画已唤起</p>
+            <strong>泰国椰林 · 海风灌溉带</strong>
+            <span>批次示意：TH-COCO-2026-031</span>
+          </div>
+          <div class="scan-reticle"></div>
+          <div class="particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="status-timeline">
+          <div class="timeline-dot is-live"></div>
+          <p id="statusText">正在载入原产地景观与批次数据...</p>
+        </div>
+
+        <aside class="voucher hidden" id="voucherCard">
+          <div class="voucher-topline">
+            <span>微信卡包券态模拟</span>
+            <strong>灰色 · 待激活</strong>
+          </div>
+          <div class="voucher-body">
+            <div>
+              <p class="voucher-type">赠品券 / 立减券</p>
+              <h3>当前不可使用</h3>
+              <p class="voucher-desc">
+                需满足二次触发条件后激活。真实项目中，这里应由微信发券结果回执更新状态。
+              </p>
+            </div>
+            <div class="voucher-stamp">LOCKED</div>
+          </div>
+          <div class="voucher-footer">
+            <span>状态码：PENDING_ACTIVATION</span>
+            <button class="ghost-btn ghost-btn--small" id="showTechButton">
+              查看真实接入要求
+            </button>
+          </div>
+        </aside>
+
+        <section class="tech-note hidden" id="techNote">
+          <h3>真实接微信卡包前，你必须面对的条件</h3>
+          <ul>
+            <li>需要微信卡券或小程序发券资质，不是单靠 H5 就能推送进卡包。</li>
+            <li>需要服务端签名、券模板、库存、核销与风控链路。</li>
+            <li>前端这层只能负责触发、展示和接收状态，不能伪造真实券入包。</li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <script>
+const introPanel = document.getElementById("introPanel");
+const experiencePanel = document.getElementById("experiencePanel");
+const startButton = document.getElementById("startButton");
+const resetButton = document.getElementById("resetButton");
+const voucherCard = document.getElementById("voucherCard");
+const statusText = document.getElementById("statusText");
+const techNote = document.getElementById("techNote");
+const showTechButton = document.getElementById("showTechButton");
+
+let timers = [];
+
+function clearTimers() {
+  timers.forEach((timer) => window.clearTimeout(timer));
+  timers = [];
+}
+
+function schedule(callback, delay) {
+  const timer = window.setTimeout(callback, delay);
+  timers.push(timer);
+}
+
+function resetExperience() {
+  clearTimers();
+  introPanel.classList.remove("hidden");
+  experiencePanel.classList.add("hidden");
+  voucherCard.classList.add("hidden");
+  techNote.classList.add("hidden");
+  resetButton.hidden = true;
+  statusText.textContent = "正在载入原产地景观与批次数据...";
+}
+
+function mockWeChatCardPush() {
+  voucherCard.classList.remove("hidden");
+  statusText.textContent = "灰色待激活券已下发为演示态，等待真实发券系统接管。";
+  resetButton.hidden = false;
+}
+
+function startExperience() {
+  resetExperience();
+  introPanel.classList.add("hidden");
+  experiencePanel.classList.remove("hidden");
+
+  statusText.textContent = "识别到货架码，正在构建泰国椰林动画场景...";
+
+  schedule(() => {
+    statusText.textContent = "原产地批次、采收带与海风灌溉场景已联动载入。";
+  }, 1600);
+
+  schedule(() => {
+    statusText.textContent = "准备发放灰色待激活券，当前券态保持不可用。";
+  }, 3500);
+
+  schedule(() => {
+    mockWeChatCardPush();
+  }, 5000);
+}
+
+startButton.addEventListener("click", startExperience);
+resetButton.addEventListener("click", startExperience);
+showTechButton.addEventListener("click", () => {
+  techNote.classList.toggle("hidden");
+});
+
+resetExperience();
+
+</script>
+  </body>
+</html>
