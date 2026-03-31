@@ -566,6 +566,34 @@ h2 {
   pointer-events: none;
 }
 
+.hero-scan-core {
+  position: absolute;
+  left: 50%;
+  top: 104px;
+  width: 126px;
+  height: 126px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(205, 255, 247, 0.46) 0, rgba(92, 247, 225, 0.24) 38%, transparent 72%);
+  filter: blur(8px);
+  animation: scanPulse 2.4s ease-in-out infinite;
+}
+
+.hero-scan-ring {
+  position: absolute;
+  left: 50%;
+  top: 82px;
+  width: 170px;
+  height: 170px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(214, 255, 249, 0.52);
+  box-shadow:
+    inset 0 0 0 1px rgba(114, 246, 222, 0.12),
+    0 0 20px rgba(111, 247, 225, 0.16);
+  animation: scanRing 2.8s ease-in-out infinite;
+}
+
 .hero-glow {
   position: absolute;
   left: 50%;
@@ -598,7 +626,8 @@ h2 {
   width: 142px;
   height: 320px;
   transform: translateX(-50%) rotate(-4deg);
-  animation: heroRise 4.8s ease-in-out infinite;
+  animation: heroMaterialize 4.8s ease-in-out infinite;
+  transform-origin: center bottom;
 }
 
 .hero-cap {
@@ -628,6 +657,7 @@ h2 {
     inset -18px 0 24px rgba(11, 107, 94, 0.15),
     inset 0 22px 26px rgba(255, 255, 255, 0.18);
   overflow: hidden;
+  outline: 1px solid rgba(232, 255, 251, 0.26);
 }
 
 .hero-carton::before {
@@ -1239,9 +1269,64 @@ h2 {
   50% { transform: translateX(-50%) translateY(-10px) rotate(-2deg); }
 }
 
+@keyframes heroMaterialize {
+  0% {
+    opacity: 0;
+    filter: blur(14px) saturate(1.4);
+    transform: translateX(-50%) translateY(28px) scale(0.76) rotate(-12deg);
+  }
+  18% {
+    opacity: 0.56;
+    filter: blur(8px) saturate(1.3);
+    transform: translateX(-50%) translateY(12px) scale(0.86) rotate(-8deg);
+  }
+  34% {
+    opacity: 0.94;
+    filter: blur(2px) saturate(1.08);
+    transform: translateX(-50%) translateY(-4px) scale(0.98) rotate(-4deg);
+  }
+  52% {
+    opacity: 1;
+    filter: blur(0) saturate(1);
+    transform: translateX(-50%) translateY(-12px) scale(1.02) rotate(-2deg);
+  }
+  76% {
+    opacity: 1;
+    filter: blur(0) saturate(1);
+    transform: translateX(-50%) translateY(-8px) scale(1) rotate(-3deg);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0) saturate(1);
+    transform: translateX(-50%) translateY(0) scale(1) rotate(-4deg);
+  }
+}
+
 @keyframes heroGlow {
   0%, 100% { transform: translateX(-50%) scale(0.94); opacity: 0.68; }
   50% { transform: translateX(-50%) scale(1.06); opacity: 1; }
+}
+
+@keyframes scanPulse {
+  0%, 100% { transform: translateX(-50%) scale(0.82); opacity: 0.38; }
+  50% { transform: translateX(-50%) scale(1.08); opacity: 1; }
+}
+
+@keyframes scanRing {
+  0% {
+    transform: translateX(-50%) scale(0.74);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.78;
+  }
+  66% {
+    opacity: 0.24;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.12);
+    opacity: 0;
+  }
 }
 
 @keyframes sway {
@@ -1424,6 +1509,8 @@ h2 {
           <div class="reflection"></div>
           <div class="foreground-shadow"></div>
           <div class="product-hero">
+            <div class="hero-scan-core"></div>
+            <div class="hero-scan-ring"></div>
             <div class="hero-glow"></div>
             <div class="hero-shadow"></div>
             <div class="hero-packshot">
@@ -1595,18 +1682,18 @@ function startExperience() {
   experiencePanel.classList.add("hidden");
   couponStack.classList.add("hidden");
   couponStack.classList.remove("is-visible");
-  statusText.textContent = "正在载入泰国椰林海岸、海水反光与产品浮现识别场景...";
+  statusText.textContent = "正在载入泰国椰林海岸，并初始化商品识别实体化场景...";
 
   setIntroCountdown();
 
   schedule(() => {
     introPanel.classList.add("hidden");
     experiencePanel.classList.remove("hidden");
-    statusText.textContent = "已识别商品批次，正在展开泰国海岸椰林与包装浮现动画...";
+    statusText.textContent = "已锁定商品批次，正在从扫描框中实体化包装与海岸椰林场景...";
   }, 2200);
 
   schedule(() => {
-    statusText.textContent = "阳光、海面反射、立体椰树与包装浮现层次已完成渲染。";
+    statusText.textContent = "阳光、海面反射、立体椰树与包装实体化层次已完成渲染。";
   }, 3900);
 
   schedule(() => {
