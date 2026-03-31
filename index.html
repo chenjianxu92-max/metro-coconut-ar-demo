@@ -10,15 +10,18 @@
     <style>
 :root {
   color-scheme: light;
-  --bg-top: #eafaf5;
-  --bg-bottom: #97dfcd;
-  --ink: #123733;
-  --muted: rgba(18, 55, 51, 0.72);
+  --bg-top: #edf9f2;
+  --bg-bottom: #88dcc9;
+  --ink: #163632;
+  --muted: rgba(22, 54, 50, 0.74);
   --panel: rgba(255, 255, 255, 0.72);
-  --panel-border: rgba(255, 255, 255, 0.55);
-  --accent: #0d8774;
-  --accent-deep: #075a53;
-  --voucher-deep: #747b83;
+  --panel-border: rgba(255, 255, 255, 0.58);
+  --accent: #0f8b7b;
+  --accent-deep: #0a5b53;
+  --orange: #f2a22a;
+  --orange-deep: #df8b0d;
+  --gray-ticket: #d9dde1;
+  --gray-ink: #6f767d;
 }
 
 * {
@@ -31,7 +34,7 @@ body {
   min-height: 100%;
   font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.88), transparent 28%),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.9), transparent 24%),
     linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
   color: var(--ink);
 }
@@ -47,27 +50,33 @@ body {
 }
 
 .panel {
-  position: relative;
   overflow: hidden;
+  border-radius: 32px;
   border: 1px solid var(--panel-border);
-  border-radius: 30px;
   background: var(--panel);
   backdrop-filter: blur(18px);
   box-shadow:
-    0 24px 80px rgba(15, 70, 64, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    0 24px 80px rgba(12, 73, 65, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .panel--intro {
-  padding: 24px 20px 22px;
+  padding: 24px 20px;
+}
+
+.panel--experience {
+  padding: 18px 16px 20px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .brand-pill,
 .signal-badge,
 .eyebrow,
 .origin-line span,
-.voucher-topline span,
-.voucher-footer span {
+.countdown-label {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -76,10 +85,9 @@ body {
 .signal-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(13, 135, 116, 0.12);
+  background: rgba(15, 139, 123, 0.12);
   color: var(--accent-deep);
   font-size: 12px;
   font-weight: 700;
@@ -104,6 +112,12 @@ h1 {
   line-height: 1.05;
 }
 
+h2 {
+  margin-top: 8px;
+  font-size: 30px;
+  line-height: 1.08;
+}
+
 .lead {
   margin-top: 14px;
   line-height: 1.6;
@@ -119,8 +133,8 @@ h1 {
   padding: 18px;
   border-radius: 24px;
   background:
-    linear-gradient(150deg, rgba(255, 255, 255, 0.82), rgba(236, 252, 248, 0.58)),
-    rgba(255, 255, 255, 0.42);
+    linear-gradient(150deg, rgba(255, 255, 255, 0.84), rgba(235, 252, 247, 0.62)),
+    rgba(255, 255, 255, 0.4);
 }
 
 .packshot {
@@ -250,63 +264,25 @@ h1 {
   line-height: 1.25;
 }
 
-.cta-row {
+.countdown-card {
+  margin-top: 20px;
   display: flex;
-  gap: 12px;
-  margin-top: 22px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(13, 135, 116, 0.1);
 }
 
-.primary-btn,
-.ghost-btn {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-}
-
-.primary-btn {
-  flex: 1;
-  padding: 15px 18px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #0f8e7d, #0a6359);
-  color: #f5fffc;
-  font-size: 16px;
-  font-weight: 800;
-  box-shadow: 0 18px 28px rgba(13, 135, 116, 0.28);
-}
-
-.ghost-btn {
-  padding: 15px 18px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.6);
-  color: var(--accent-deep);
-  font-size: 15px;
+.countdown-label {
+  color: var(--muted);
+  font-size: 11px;
   font-weight: 700;
 }
 
-.ghost-btn--small {
-  padding: 10px 12px;
-  font-size: 13px;
-}
-
-.primary-btn:hover,
-.ghost-btn:hover {
-  transform: translateY(-1px);
-}
-
-.disclaimer {
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.panel--experience {
-  padding: 18px 16px 20px;
-}
-
-.hidden {
-  display: none !important;
+#countdownText {
+  font-size: 28px;
+  color: var(--accent-deep);
 }
 
 .experience-header {
@@ -316,124 +292,197 @@ h1 {
   gap: 12px;
 }
 
-h2 {
-  margin-top: 8px;
-  font-size: 30px;
-  line-height: 1.08;
-}
-
 .scene {
   position: relative;
-  height: 620px;
+  height: 640px;
   margin-top: 18px;
   overflow: hidden;
-  border-radius: 28px;
-  background: linear-gradient(180deg, #6be5ef 0%, #97f0d1 36%, #50bea2 100%);
-  box-shadow: inset 0 -40px 60px rgba(7, 64, 64, 0.18);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, #8be5f2 0%, #73dfd3 28%, #58c49e 62%, #2e8d67 100%);
+  box-shadow:
+    inset 0 -45px 80px rgba(8, 62, 53, 0.22),
+    inset 0 40px 70px rgba(255, 255, 255, 0.14);
 }
 
 .scene > * {
   position: absolute;
 }
 
-.sun-halo {
-  top: 38px;
+.sun-core {
+  top: 58px;
   left: 50%;
-  width: 240px;
-  height: 240px;
+  width: 126px;
+  height: 126px;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 243, 188, 0.95) 0, rgba(255, 243, 188, 0.45) 30%, transparent 66%);
-  filter: blur(6px);
-  animation: pulse 4.6s ease-in-out infinite;
+  background: radial-gradient(circle, #fff7c8 0, #ffe59d 44%, rgba(255, 221, 138, 0.72) 65%, transparent 75%);
+  animation: breathe 5s ease-in-out infinite;
 }
 
-.sky-layer {
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 16%, rgba(255, 255, 255, 0.68), transparent 24%),
-    radial-gradient(circle at 78% 20%, rgba(255, 255, 255, 0.5), transparent 18%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 56%);
-}
-
-.mist-layer {
-  inset-inline: -10%;
-  height: 120px;
+.sun-aura {
+  top: 16px;
+  left: 50%;
+  width: 280px;
+  height: 280px;
+  transform: translateX(-50%);
   border-radius: 50%;
-  filter: blur(12px);
-  background: rgba(238, 255, 248, 0.42);
-  animation: drift 14s linear infinite;
+  background: radial-gradient(circle, rgba(255, 247, 193, 0.54) 0, rgba(255, 247, 193, 0.2) 34%, transparent 70%);
+  filter: blur(10px);
+  animation: aura 6.5s ease-in-out infinite;
 }
 
-.mist-layer--back {
-  top: 130px;
+.cloud {
+  height: 56px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  filter: blur(1px);
 }
 
-.mist-layer--front {
-  bottom: 190px;
-  background: rgba(244, 255, 252, 0.32);
-  animation-duration: 18s;
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
 }
 
-.mountain {
-  bottom: 218px;
-  width: 58%;
-  height: 180px;
-  background: linear-gradient(180deg, rgba(20, 104, 92, 0.38), rgba(10, 63, 56, 0.68));
-  clip-path: polygon(0 100%, 18% 56%, 34% 68%, 53% 24%, 67% 52%, 100% 100%);
+.cloud--one {
+  top: 112px;
+  left: 26px;
+  width: 110px;
+  animation: cloudDrift 18s linear infinite;
 }
 
-.mountain--left {
-  left: -8%;
+.cloud--one::before {
+  width: 46px;
+  height: 46px;
+  left: 10px;
+  top: -18px;
 }
 
-.mountain--right {
-  right: -6%;
-  transform: scaleX(-1) translateY(18px);
+.cloud--one::after {
+  width: 52px;
+  height: 52px;
+  right: 16px;
+  top: -22px;
 }
 
-.water-layer {
+.cloud--two {
+  top: 138px;
+  right: 30px;
+  width: 130px;
+  animation: cloudDrift 22s linear infinite reverse;
+}
+
+.cloud--two::before {
+  width: 44px;
+  height: 44px;
+  left: 18px;
+  top: -14px;
+}
+
+.cloud--two::after {
+  width: 58px;
+  height: 58px;
+  right: 18px;
+  top: -26px;
+}
+
+.far-jungle {
+  inset-inline: -10%;
+  bottom: 232px;
+  height: 170px;
+  background:
+    radial-gradient(circle at 8% 100%, #1b7d55 0, #1b7d55 22%, transparent 23%),
+    radial-gradient(circle at 18% 100%, #216f4f 0, #216f4f 20%, transparent 21%),
+    radial-gradient(circle at 30% 100%, #1b7d55 0, #1b7d55 23%, transparent 24%),
+    radial-gradient(circle at 42% 100%, #216f4f 0, #216f4f 22%, transparent 23%),
+    radial-gradient(circle at 56% 100%, #1b7d55 0, #1b7d55 24%, transparent 25%),
+    radial-gradient(circle at 70% 100%, #216f4f 0, #216f4f 20%, transparent 21%),
+    radial-gradient(circle at 84% 100%, #1b7d55 0, #1b7d55 23%, transparent 24%);
+  opacity: 0.6;
+}
+
+.mid-jungle {
+  inset-inline: -12%;
+  bottom: 178px;
+  height: 210px;
+  background:
+    radial-gradient(circle at 10% 100%, #125c40 0, #125c40 21%, transparent 22%),
+    radial-gradient(circle at 24% 100%, #1b7b55 0, #1b7b55 23%, transparent 24%),
+    radial-gradient(circle at 38% 100%, #146546 0, #146546 24%, transparent 25%),
+    radial-gradient(circle at 54% 100%, #1f8d60 0, #1f8d60 21%, transparent 22%),
+    radial-gradient(circle at 70% 100%, #146546 0, #146546 24%, transparent 25%),
+    radial-gradient(circle at 86% 100%, #1b7b55 0, #1b7b55 22%, transparent 23%);
+}
+
+.lagoon {
   inset-inline: 0;
   bottom: 0;
-  height: 240px;
+  height: 250px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 24%),
-    radial-gradient(circle at 25% 16%, rgba(255, 255, 255, 0.2), transparent 16%),
-    repeating-linear-gradient(180deg, rgba(115, 255, 240, 0.28) 0, rgba(115, 255, 240, 0.28) 6px, rgba(14, 129, 110, 0.1) 6px, rgba(14, 129, 110, 0.1) 16px),
-    linear-gradient(180deg, rgba(28, 142, 126, 0.12), rgba(6, 92, 83, 0.84));
-  animation: shimmer 6s linear infinite;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 18%),
+    repeating-linear-gradient(
+      180deg,
+      rgba(134, 255, 244, 0.24) 0,
+      rgba(134, 255, 244, 0.24) 5px,
+      rgba(9, 121, 101, 0.08) 5px,
+      rgba(9, 121, 101, 0.08) 16px
+    ),
+    linear-gradient(180deg, rgba(34, 157, 138, 0.16), rgba(4, 79, 68, 0.9));
+  animation: waterMove 7s linear infinite;
 }
 
-.island {
+.shore {
   left: 50%;
-  bottom: 156px;
-  width: 300px;
-  height: 128px;
+  bottom: 166px;
+  width: 340px;
+  height: 112px;
   transform: translateX(-50%);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.16), transparent 22%),
-    linear-gradient(180deg, #2f8c54 0%, #155639 100%);
+    radial-gradient(circle at 50% 14%, rgba(255, 240, 208, 0.85), rgba(231, 210, 160, 0.88) 46%, rgba(166, 126, 73, 0.18) 80%, transparent 82%),
+    radial-gradient(circle at 50% 54%, #2d9f67 0, #25754d 58%, #1a523a 100%);
   box-shadow:
-    0 18px 24px rgba(8, 53, 45, 0.2),
-    inset 0 20px 28px rgba(162, 235, 171, 0.3);
+    0 22px 36px rgba(5, 48, 41, 0.18),
+    inset 0 18px 24px rgba(255, 244, 222, 0.26);
+}
+
+.reflection {
+  left: 50%;
+  bottom: 104px;
+  width: 250px;
+  height: 90px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0, rgba(255, 255, 255, 0.06) 45%, transparent 72%);
+  filter: blur(2px);
+  animation: shimmer 4.6s ease-in-out infinite;
 }
 
 .palm {
-  bottom: 132px;
-  width: 170px;
-  height: 280px;
-  animation: sway 5.4s ease-in-out infinite;
+  bottom: 118px;
+  width: 176px;
+  height: 300px;
   transform-origin: bottom center;
+  animation: sway 5.8s ease-in-out infinite;
 }
 
 .palm--left {
-  left: 48px;
+  left: 24px;
+}
+
+.palm--center {
+  left: 50%;
+  bottom: 126px;
+  transform: translateX(-50%);
+  animation-delay: -1.2s;
 }
 
 .palm--right {
-  right: 44px;
-  animation-delay: -1.4s;
+  right: 16px;
+  animation-delay: -2.1s;
 }
 
 .trunk {
@@ -441,19 +490,20 @@ h2 {
   left: 50%;
   bottom: 0;
   width: 18px;
-  height: 180px;
-  transform: translateX(-50%) skewX(-8deg);
+  height: 188px;
+  transform: translateX(-50%) skewX(-7deg);
   transform-origin: bottom center;
   border-radius: 16px;
-  background: repeating-linear-gradient(180deg, #80552f 0, #80552f 11px, #9f7147 11px, #9f7147 18px);
+  background:
+    repeating-linear-gradient(180deg, #875a31 0, #875a31 10px, #a97745 10px, #a97745 18px);
   box-shadow: inset -4px 0 7px rgba(67, 34, 19, 0.36);
 }
 
 .leaf {
   position: absolute;
   left: 50%;
-  top: 12px;
-  width: 120px;
+  top: 10px;
+  width: 126px;
   height: 34px;
   background: linear-gradient(90deg, #9ef780 0%, #40b85a 100%);
   border-radius: 90% 0 90% 0;
@@ -462,46 +512,46 @@ h2 {
 }
 
 .leaf-1 {
-  transform: rotate(-32deg);
+  transform: rotate(-40deg);
 }
 
 .leaf-2 {
-  transform: rotate(-5deg);
+  transform: rotate(-12deg);
 }
 
 .leaf-3 {
-  transform: rotate(18deg);
+  transform: rotate(12deg);
 }
 
 .leaf-4 {
-  transform: rotate(42deg);
+  transform: rotate(36deg);
 }
 
 .leaf-5 {
-  transform: rotate(66deg);
+  transform: rotate(62deg);
 }
 
 .floating-card {
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 42px);
+  width: calc(100% - 36px);
   padding: 16px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
   background: rgba(6, 44, 40, 0.24);
   color: #eefef9;
-  box-shadow: 0 16px 42px rgba(3, 28, 26, 0.22);
   backdrop-filter: blur(12px);
+  box-shadow: 0 16px 42px rgba(3, 28, 26, 0.22);
 }
 
 .origin-card {
-  top: 26px;
-  animation: float 4.2s ease-in-out infinite;
+  top: 24px;
+  animation: floatCard 4s ease-in-out infinite;
 }
 
 .origin-card p,
 .origin-card span {
-  color: rgba(238, 254, 249, 0.82);
+  color: rgba(238, 254, 249, 0.84);
   font-size: 13px;
 }
 
@@ -513,32 +563,44 @@ h2 {
 
 .scan-reticle {
   left: 50%;
-  top: 53%;
-  width: 210px;
-  height: 210px;
+  top: 52%;
+  width: 220px;
+  height: 220px;
   transform: translate(-50%, -50%);
-  border: 2px solid rgba(222, 255, 249, 0.9);
-  border-radius: 24px;
-  box-shadow: 0 0 0 999px rgba(5, 34, 31, 0.06), 0 0 28px rgba(193, 255, 241, 0.25);
+  border: 2px solid rgba(235, 255, 248, 0.88);
+  border-radius: 30px;
+  box-shadow:
+    0 0 0 999px rgba(6, 37, 34, 0.08),
+    0 0 30px rgba(209, 255, 245, 0.24);
 }
 
 .scan-reticle::before,
 .scan-reticle::after {
   content: "";
   position: absolute;
-  inset-inline: 20px;
+  left: 20px;
+  right: 20px;
   height: 2px;
-  background: rgba(231, 255, 250, 0.9);
-  animation: scanline 2.6s ease-in-out infinite;
+  background: rgba(245, 255, 252, 0.88);
 }
 
 .scan-reticle::before {
-  top: 32px;
+  top: 42px;
 }
 
 .scan-reticle::after {
-  top: 172px;
-  animation-delay: -1.3s;
+  bottom: 42px;
+}
+
+.light-sweep {
+  left: 50%;
+  top: 30%;
+  width: 250px;
+  height: 320px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 24%, rgba(255, 255, 255, 0.18) 50%, transparent 76%);
+  filter: blur(6px);
+  animation: sweep 3s ease-in-out infinite;
 }
 
 .particles {
@@ -551,39 +613,18 @@ h2 {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.54);
-  animation: bubble 7s linear infinite;
+  background: rgba(255, 255, 255, 0.56);
+  animation: bubble 8s linear infinite;
 }
 
-.particles span:nth-child(1) {
-  left: 14%;
-  animation-delay: 0s;
-}
-
-.particles span:nth-child(2) {
-  left: 28%;
-  animation-delay: -1.2s;
-}
-
-.particles span:nth-child(3) {
-  left: 44%;
-  animation-delay: -2.5s;
-}
-
-.particles span:nth-child(4) {
-  left: 58%;
-  animation-delay: -3.7s;
-}
-
-.particles span:nth-child(5) {
-  left: 74%;
-  animation-delay: -1.9s;
-}
-
-.particles span:nth-child(6) {
-  left: 86%;
-  animation-delay: -4.1s;
-}
+.particles span:nth-child(1) { left: 12%; animation-delay: 0s; }
+.particles span:nth-child(2) { left: 23%; animation-delay: -1.1s; }
+.particles span:nth-child(3) { left: 35%; animation-delay: -2.4s; }
+.particles span:nth-child(4) { left: 46%; animation-delay: -3.8s; }
+.particles span:nth-child(5) { left: 57%; animation-delay: -1.8s; }
+.particles span:nth-child(6) { left: 68%; animation-delay: -4.2s; }
+.particles span:nth-child(7) { left: 79%; animation-delay: -2.8s; }
+.particles span:nth-child(8) { left: 89%; animation-delay: -5.1s; }
 
 .status-timeline {
   display: flex;
@@ -606,165 +647,217 @@ h2 {
   box-shadow: 0 0 0 10px rgba(23, 185, 151, 0.12);
 }
 
-.voucher {
+.coupon-stack {
+  display: grid;
+  gap: 10px;
   margin-top: 18px;
-  padding: 16px;
-  border-radius: 24px;
-  border: 1px dashed rgba(118, 126, 136, 0.5);
-  background:
-    linear-gradient(135deg, rgba(239, 242, 245, 0.96), rgba(214, 220, 225, 0.9)),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
 }
 
-.voucher-topline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--voucher-deep);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.voucher-body {
-  display: flex;
-  justify-content: space-between;
+.coupon {
+  display: grid;
+  grid-template-columns: 92px 1fr;
   gap: 12px;
-  margin-top: 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(22, 54, 50, 0.08);
+  transform: translateY(18px);
+  opacity: 0;
 }
 
-.voucher-type {
-  color: var(--voucher-deep);
-  font-size: 12px;
-  font-weight: 700;
+.coupon-stack.is-visible .coupon {
+  animation: couponIn 560ms ease forwards;
 }
 
-.voucher-body h3 {
-  margin-top: 8px;
-  color: #51575d;
-  font-size: 30px;
-  line-height: 1.04;
+.coupon-stack.is-visible .coupon--locked {
+  animation-delay: 180ms;
 }
 
-.voucher-desc {
-  margin-top: 10px;
-  color: #667079;
-  line-height: 1.55;
-  font-size: 14px;
+.coupon--active {
+  background: linear-gradient(135deg, #f9b13f, #f09a14);
+  color: #fffdf9;
 }
 
-.voucher-stamp {
-  align-self: center;
-  min-width: 86px;
-  padding: 14px 10px;
-  border: 2px solid rgba(108, 116, 126, 0.44);
-  border-radius: 18px;
-  color: rgba(108, 116, 126, 0.84);
-  font-size: 18px;
+.coupon--locked {
+  background: linear-gradient(135deg, #eceff2, #d7dbdf);
+  color: var(--gray-ink);
+}
+
+.coupon-value {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-right: 10px;
+  border-right: 1px dashed rgba(255, 255, 255, 0.45);
+}
+
+.coupon--locked .coupon-value {
+  border-right-color: rgba(111, 118, 125, 0.26);
+}
+
+.coupon-value strong {
+  font-size: 31px;
+  line-height: 1;
   font-weight: 900;
-  text-align: center;
-  transform: rotate(-12deg);
 }
 
-.voucher-footer {
+.coupon-value span {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.coupon-copy {
+  min-width: 0;
+}
+
+.coupon-title-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.coupon-title-row h3 {
+  font-size: 14px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coupon-copy p {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.92;
+}
+
+.coupon-tag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.coupon-tag--active {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--orange-deep);
+}
+
+.coupon-tag--locked {
+  background: rgba(111, 118, 125, 0.18);
+  color: #61686f;
+}
+
+.cta-row {
+  display: flex;
   gap: 12px;
-  margin-top: 14px;
+  margin-top: 18px;
 }
 
-.tech-note {
-  margin-top: 16px;
-  padding: 16px;
-  border-radius: 20px;
-  background: rgba(255, 248, 230, 0.78);
-  color: #54442f;
+.cta-row--single {
+  justify-content: center;
 }
 
-.tech-note h3 {
-  font-size: 18px;
+.ghost-btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--accent-deep);
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform 180ms ease;
 }
 
-.tech-note ul {
-  margin: 12px 0 0;
-  padding-left: 18px;
-  line-height: 1.65;
+.ghost-btn:hover {
+  transform: translateY(-1px);
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    transform: translateX(-50%) scale(0.96);
-    opacity: 0.9;
-  }
-  50% {
-    transform: translateX(-50%) scale(1.04);
-    opacity: 1;
-  }
+@keyframes breathe {
+  0%, 100% { transform: translateX(-50%) scale(0.96); }
+  50% { transform: translateX(-50%) scale(1.05); }
 }
 
-@keyframes drift {
-  0% {
-    transform: translateX(-8%);
-  }
-  100% {
-    transform: translateX(8%);
-  }
+@keyframes aura {
+  0%, 100% { transform: translateX(-50%) scale(0.92); opacity: 0.7; }
+  50% { transform: translateX(-50%) scale(1.04); opacity: 1; }
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(18px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes waterMove {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 0 0, 0 130px, 0 0; }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: 0 0, 0 0, 0 0, 0 0;
-  }
-  100% {
-    background-position: 0 0, 0 0, 0 120px, 0 0;
-  }
+  0%, 100% { transform: translateX(-50%) scaleX(0.95); opacity: 0.55; }
+  50% { transform: translateX(-50%) scaleX(1.05); opacity: 0.9; }
 }
 
 @keyframes sway {
-  0%,
-  100% {
-    transform: rotate(-2deg);
-  }
-  50% {
-    transform: rotate(4deg);
-  }
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(4deg); }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-7px);
-  }
+.palm--center {
+  animation-name: centerSway;
 }
 
-@keyframes scanline {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: scaleX(0.92);
-  }
-  50% {
-    opacity: 1;
-    transform: scaleX(1);
-  }
+@keyframes centerSway {
+  0%, 100% { transform: translateX(-50%) rotate(-1deg); }
+  50% { transform: translateX(-50%) rotate(3deg); }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-7px); }
+}
+
+@keyframes sweep {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  25% { opacity: 0.7; }
+  60% { opacity: 0.2; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
 }
 
 @keyframes bubble {
   0% {
-    transform: translateY(0) scale(0.7);
+    transform: translateY(0) scale(0.6);
     opacity: 0;
   }
   10% {
     opacity: 0.7;
   }
   100% {
-    transform: translateY(-620px) scale(1.2);
+    transform: translateY(-650px) scale(1.16);
     opacity: 0;
+  }
+}
+
+@keyframes couponIn {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -786,23 +879,21 @@ h2 {
     width: 100%;
   }
 
-  .cta-row {
-    flex-direction: column;
-  }
-
-  .experience-header,
-  .voucher-topline,
-  .voucher-footer {
+  .experience-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .voucher-body {
-    flex-direction: column;
+  .scene {
+    height: 600px;
   }
 
-  .voucher-stamp {
-    align-self: flex-start;
+  .coupon {
+    grid-template-columns: 82px 1fr;
+  }
+
+  .coupon-value strong {
+    font-size: 28px;
   }
 }
 
@@ -812,10 +903,10 @@ h2 {
     <main class="shell">
       <section class="panel panel--intro" id="introPanel">
         <div class="brand-pill">METRO · NFC 椰子水</div>
-        <p class="eyebrow">AR 溯源演示原型</p>
-        <h1>扫描货架码后，进入泰国椰林溯源场景</h1>
+        <p class="eyebrow">AR 溯源演示</p>
+        <h1>已识别货架 AR 码，正在进入泰国椰林原产地</h1>
         <p class="lead">
-          这个原型模拟了用户在货架前扫码后的关键体验：产地场景被唤起、溯源信息浮现、5 秒后出现一张灰色待激活券。
+          页面将自动展开溯源动画，并在场景稳定后自动弹出优惠券结果。
         </p>
 
         <div class="product-card">
@@ -835,44 +926,49 @@ h2 {
           <div class="product-copy">
             <div class="origin-line">
               <span>原产地</span>
-              <strong>泰国 · 椰林产区</strong>
+              <strong>泰国 · 香水椰种植带</strong>
             </div>
             <div class="origin-line">
-              <span>扫码触发</span>
-              <strong>产地动画 + 灰色待激活券</strong>
+              <span>当前流程</span>
+              <strong>自动播放椰林动画 · 自动下发优惠券</strong>
             </div>
           </div>
         </div>
 
-        <div class="cta-row">
-          <button class="primary-btn" id="startButton">开始 AR 溯源演示</button>
-          <button class="ghost-btn" id="resetButton" hidden>重新播放</button>
+        <div class="countdown-card">
+          <span class="countdown-label">自动进入中</span>
+          <strong id="countdownText">2 秒</strong>
         </div>
-
-        <p class="disclaimer">
-          当前为演示版。灰色券 UI 与节奏已实现；真实“微信卡包立即收券”需接入微信卡券 API、商户资质与签名流程。
-        </p>
       </section>
 
       <section class="panel panel--experience hidden" id="experiencePanel">
         <div class="experience-header">
           <div>
             <p class="eyebrow">THAILAND TRACEABILITY</p>
-            <h2>泰国香水椰种植带</h2>
+            <h2>泰国椰林原产地已唤起</h2>
           </div>
           <div class="signal-badge">溯源识别成功</div>
         </div>
 
         <div class="scene">
-          <div class="sun-halo"></div>
-          <div class="sky-layer"></div>
-          <div class="mist-layer mist-layer--back"></div>
-          <div class="mountain mountain--left"></div>
-          <div class="mountain mountain--right"></div>
-          <div class="water-layer"></div>
-          <div class="mist-layer mist-layer--front"></div>
-          <div class="island"></div>
+          <div class="sun-core"></div>
+          <div class="sun-aura"></div>
+          <div class="cloud cloud--one"></div>
+          <div class="cloud cloud--two"></div>
+          <div class="far-jungle"></div>
+          <div class="mid-jungle"></div>
+          <div class="lagoon"></div>
+          <div class="shore"></div>
+          <div class="reflection"></div>
           <div class="palm palm--left">
+            <span class="trunk"></span>
+            <span class="leaf leaf-1"></span>
+            <span class="leaf leaf-2"></span>
+            <span class="leaf leaf-3"></span>
+            <span class="leaf leaf-4"></span>
+            <span class="leaf leaf-5"></span>
+          </div>
+          <div class="palm palm--center">
             <span class="trunk"></span>
             <span class="leaf leaf-1"></span>
             <span class="leaf leaf-2"></span>
@@ -888,65 +984,70 @@ h2 {
             <span class="leaf leaf-4"></span>
             <span class="leaf leaf-5"></span>
           </div>
+
           <div class="floating-card origin-card">
-            <p>原产地动画已唤起</p>
-            <strong>泰国椰林 · 海风灌溉带</strong>
-            <span>批次示意：TH-COCO-2026-031</span>
+            <p>批次溯源动画</p>
+            <strong>泰国春蓬府椰林 · 海风灌溉产区</strong>
+            <span>采收批次：TH-COCO-2026-031 · 鲜采直灌锁鲜</span>
           </div>
+
           <div class="scan-reticle"></div>
+          <div class="light-sweep"></div>
+
           <div class="particles" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span>
           </div>
         </div>
 
         <div class="status-timeline">
           <div class="timeline-dot is-live"></div>
-          <p id="statusText">正在载入原产地景观与批次数据...</p>
+          <p id="statusText">正在载入泰国椰林、海风水面与采收批次信息...</p>
         </div>
 
-        <aside class="voucher hidden" id="voucherCard">
-          <div class="voucher-topline">
-            <span>微信卡包券态模拟</span>
-            <strong>灰色 · 待激活</strong>
-          </div>
-          <div class="voucher-body">
-            <div>
-              <p class="voucher-type">赠品券 / 立减券</p>
-              <h3>当前不可使用</h3>
-              <p class="voucher-desc">
-                需满足二次触发条件后激活。真实项目中，这里应由微信发券结果回执更新状态。
-              </p>
+        <section class="coupon-stack hidden" id="couponStack">
+          <article class="coupon coupon--active">
+            <div class="coupon-value">
+              <strong>11元</strong>
+              <span>无门槛立减</span>
             </div>
-            <div class="voucher-stamp">LOCKED</div>
-          </div>
-          <div class="voucher-footer">
-            <span>状态码：PENDING_ACTIVATION</span>
-            <button class="ghost-btn ghost-btn--small" id="showTechButton">
-              查看真实接入要求
-            </button>
-          </div>
-        </aside>
+            <div class="coupon-copy">
+              <div class="coupon-title-row">
+                <h3>11元水果生鲜立减券</h3>
+                <span class="coupon-tag coupon-tag--active">使用</span>
+              </div>
+              <p>2026-03-30 至 2026-07-30</p>
+            </div>
+          </article>
 
-        <section class="tech-note hidden" id="techNote">
-          <h3>真实接微信卡包前，你必须面对的条件</h3>
-          <ul>
-            <li>需要微信卡券或小程序发券资质，不是单靠 H5 就能推送进卡包。</li>
-            <li>需要服务端签名、券模板、库存、核销与风控链路。</li>
-            <li>前端这层只能负责触发、展示和接收状态，不能伪造真实券入包。</li>
-          </ul>
+          <article class="coupon coupon--locked">
+            <div class="coupon-value">
+              <strong>11元</strong>
+              <span>无门槛立减</span>
+            </div>
+            <div class="coupon-copy">
+              <div class="coupon-title-row">
+                <h3>11元水果生鲜立减券</h3>
+                <span class="coupon-tag coupon-tag--locked">使用</span>
+              </div>
+              <p>2026-03-30 至 2026-07-30</p>
+            </div>
+          </article>
         </section>
+
+        <div class="cta-row cta-row--single">
+          <button class="ghost-btn" id="resetButton">重新播放动画</button>
+        </div>
       </section>
     </main>
 
     <script>
 const introPanel = document.getElementById("introPanel");
 const experiencePanel = document.getElementById("experiencePanel");
-const startButton = document.getElementById("startButton");
-const resetButton = document.getElementById("resetButton");
-const voucherCard = document.getElementById("voucherCard");
 const statusText = document.getElementById("statusText");
-const techNote = document.getElementById("techNote");
-const showTechButton = document.getElementById("showTechButton");
+const countdownText = document.getElementById("countdownText");
+const couponStack = document.getElementById("couponStack");
+const resetButton = document.getElementById("resetButton");
 
 let timers = [];
 
@@ -960,49 +1061,57 @@ function schedule(callback, delay) {
   timers.push(timer);
 }
 
-function resetExperience() {
-  clearTimers();
-  introPanel.classList.remove("hidden");
-  experiencePanel.classList.add("hidden");
-  voucherCard.classList.add("hidden");
-  techNote.classList.add("hidden");
-  resetButton.hidden = true;
-  statusText.textContent = "正在载入原产地景观与批次数据...";
+function setIntroCountdown() {
+  countdownText.textContent = "2 秒";
+
+  schedule(() => {
+    countdownText.textContent = "1 秒";
+  }, 1000);
+
+  schedule(() => {
+    countdownText.textContent = "即将打开";
+  }, 1800);
 }
 
-function mockWeChatCardPush() {
-  voucherCard.classList.remove("hidden");
-  statusText.textContent = "灰色待激活券已下发为演示态，等待真实发券系统接管。";
-  resetButton.hidden = false;
+function showCoupons() {
+  couponStack.classList.remove("hidden");
+  couponStack.classList.add("is-visible");
+  statusText.textContent = "优惠券已自动下发：上方券可使用，下方券为灰色不可使用。";
 }
 
 function startExperience() {
-  resetExperience();
-  introPanel.classList.add("hidden");
-  experiencePanel.classList.remove("hidden");
+  clearTimers();
 
-  statusText.textContent = "识别到货架码，正在构建泰国椰林动画场景...";
+  introPanel.classList.remove("hidden");
+  experiencePanel.classList.add("hidden");
+  couponStack.classList.add("hidden");
+  couponStack.classList.remove("is-visible");
+  statusText.textContent = "正在载入泰国椰林、海风水面与采收批次信息...";
 
-  schedule(() => {
-    statusText.textContent = "原产地批次、采收带与海风灌溉场景已联动载入。";
-  }, 1600);
-
-  schedule(() => {
-    statusText.textContent = "准备发放灰色待激活券，当前券态保持不可用。";
-  }, 3500);
+  setIntroCountdown();
 
   schedule(() => {
-    mockWeChatCardPush();
-  }, 5000);
+    introPanel.classList.add("hidden");
+    experiencePanel.classList.remove("hidden");
+    statusText.textContent = "已识别商品批次，正在展开泰国椰林实景动画...";
+  }, 2200);
+
+  schedule(() => {
+    statusText.textContent = "海风、水面反射与椰林层次已完成渲染。";
+  }, 3900);
+
+  schedule(() => {
+    statusText.textContent = "优惠券准备完成，正在自动弹出券结果...";
+  }, 5600);
+
+  schedule(() => {
+    showCoupons();
+  }, 6900);
 }
 
-startButton.addEventListener("click", startExperience);
 resetButton.addEventListener("click", startExperience);
-showTechButton.addEventListener("click", () => {
-  techNote.classList.toggle("hidden");
-});
 
-resetExperience();
+startExperience();
 
 </script>
   </body>
