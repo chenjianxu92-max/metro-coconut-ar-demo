@@ -299,14 +299,23 @@ h2 {
   overflow: hidden;
   border-radius: 30px;
   background:
-    linear-gradient(180deg, #8be5f2 0%, #73dfd3 28%, #58c49e 62%, #2e8d67 100%);
+    linear-gradient(180deg, #90e7f3 0%, #73dfd3 24%, #5fd0b1 52%, #2e8d67 100%);
   box-shadow:
     inset 0 -45px 80px rgba(8, 62, 53, 0.22),
     inset 0 40px 70px rgba(255, 255, 255, 0.14);
+  perspective: 1100px;
 }
 
 .scene > * {
   position: absolute;
+}
+
+.scene-depth {
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.42), transparent 20%),
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.2), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 42%);
 }
 
 .sun-core {
@@ -330,6 +339,34 @@ h2 {
   background: radial-gradient(circle, rgba(255, 247, 193, 0.54) 0, rgba(255, 247, 193, 0.2) 34%, transparent 70%);
   filter: blur(10px);
   animation: aura 6.5s ease-in-out infinite;
+}
+
+.sun-rays {
+  top: -30px;
+  left: 50%;
+  width: 420px;
+  height: 300px;
+  transform: translateX(-50%);
+  background:
+    conic-gradient(
+      from 180deg at 50% 0%,
+      rgba(255, 244, 181, 0) 0deg,
+      rgba(255, 244, 181, 0.18) 22deg,
+      rgba(255, 244, 181, 0) 44deg,
+      rgba(255, 244, 181, 0.14) 70deg,
+      rgba(255, 244, 181, 0) 95deg,
+      rgba(255, 244, 181, 0.16) 118deg,
+      rgba(255, 244, 181, 0) 180deg,
+      rgba(255, 244, 181, 0.16) 242deg,
+      rgba(255, 244, 181, 0) 268deg,
+      rgba(255, 244, 181, 0.14) 292deg,
+      rgba(255, 244, 181, 0) 316deg,
+      rgba(255, 244, 181, 0.18) 340deg,
+      rgba(255, 244, 181, 0) 360deg
+    );
+  opacity: 0.7;
+  filter: blur(1px);
+  animation: rays 12s linear infinite;
 }
 
 .cloud {
@@ -389,6 +426,33 @@ h2 {
   top: -26px;
 }
 
+.sea-haze {
+  inset-inline: -6%;
+  bottom: 250px;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0));
+  filter: blur(8px);
+}
+
+.distant-island {
+  bottom: 246px;
+  height: 74px;
+  background: linear-gradient(180deg, rgba(16, 104, 82, 0.55), rgba(8, 70, 56, 0.84));
+  filter: blur(0.4px);
+}
+
+.distant-island--left {
+  left: -12px;
+  width: 160px;
+  clip-path: polygon(0 100%, 12% 84%, 30% 54%, 46% 62%, 58% 38%, 74% 56%, 100% 100%);
+}
+
+.distant-island--right {
+  right: -4px;
+  width: 182px;
+  clip-path: polygon(0 100%, 20% 76%, 34% 64%, 50% 34%, 70% 48%, 86% 66%, 100% 100%);
+}
+
 .far-jungle {
   inset-inline: -10%;
   bottom: 232px;
@@ -434,6 +498,26 @@ h2 {
   animation: waterMove 7s linear infinite;
 }
 
+.wave-band {
+  inset-inline: -8%;
+  height: 18px;
+  border-radius: 50%;
+  border-top: 2px solid rgba(216, 255, 249, 0.28);
+  border-bottom: 1px solid rgba(5, 79, 69, 0.1);
+  filter: blur(0.4px);
+}
+
+.wave-band--one {
+  bottom: 122px;
+  animation: waveFloat 6.5s ease-in-out infinite;
+}
+
+.wave-band--two {
+  bottom: 92px;
+  opacity: 0.7;
+  animation: waveFloat 7.6s ease-in-out infinite reverse;
+}
+
 .shore {
   left: 50%;
   bottom: 166px;
@@ -447,6 +531,7 @@ h2 {
   box-shadow:
     0 22px 36px rgba(5, 48, 41, 0.18),
     inset 0 18px 24px rgba(255, 244, 222, 0.26);
+  transform: translateX(-50%) rotateX(56deg);
 }
 
 .reflection {
@@ -459,6 +544,16 @@ h2 {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0, rgba(255, 255, 255, 0.06) 45%, transparent 72%);
   filter: blur(2px);
   animation: shimmer 4.6s ease-in-out infinite;
+}
+
+.foreground-shadow {
+  left: 50%;
+  bottom: 78px;
+  width: 320px;
+  height: 46px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(6, 49, 42, 0.28) 0, rgba(6, 49, 42, 0.1) 42%, transparent 72%);
+  filter: blur(8px);
 }
 
 .palm {
@@ -499,6 +594,18 @@ h2 {
   box-shadow: inset -4px 0 7px rgba(67, 34, 19, 0.36);
 }
 
+.crown {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: 70px;
+  height: 50px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(44, 118, 48, 0.95) 0, rgba(30, 89, 37, 0.95) 74%, transparent 76%);
+  filter: blur(1px);
+}
+
 .leaf {
   position: absolute;
   left: 50%;
@@ -531,6 +638,46 @@ h2 {
   transform: rotate(62deg);
 }
 
+.leaf-6 {
+  transform: rotate(86deg);
+}
+
+.leaf-7 {
+  transform: rotate(-62deg);
+}
+
+.coconut-cluster {
+  position: absolute;
+  left: 50%;
+  top: 64px;
+  width: 44px;
+  height: 34px;
+  transform: translateX(-50%);
+}
+
+.coconut-cluster::before,
+.coconut-cluster::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 36%, #9a6a2f 0, #7b4c21 56%, #603713 100%);
+  box-shadow: inset -3px -4px 6px rgba(65, 33, 9, 0.3);
+}
+
+.coconut-cluster::before {
+  width: 20px;
+  height: 20px;
+  left: 2px;
+  top: 6px;
+}
+
+.coconut-cluster::after {
+  width: 22px;
+  height: 22px;
+  right: 0;
+  top: 10px;
+}
+
 .floating-card {
   left: 50%;
   transform: translateX(-50%);
@@ -559,6 +706,34 @@ h2 {
   display: block;
   margin: 8px 0 6px;
   font-size: 22px;
+}
+
+.floating-badge {
+  right: 18px;
+  bottom: 194px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  color: #effef9;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 16px 26px rgba(5, 43, 37, 0.16);
+}
+
+.batch-badge span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(239, 254, 249, 0.76);
+}
+
+.batch-badge strong {
+  display: block;
+  margin-top: 4px;
+  width: 122px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .scan-reticle {
@@ -828,6 +1003,11 @@ h2 {
   50% { transform: translateX(-50%) scale(1.04); opacity: 1; }
 }
 
+@keyframes rays {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+
 @keyframes cloudDrift {
   0% { transform: translateX(0); }
   50% { transform: translateX(18px); }
@@ -842,6 +1022,11 @@ h2 {
 @keyframes shimmer {
   0%, 100% { transform: translateX(-50%) scaleX(0.95); opacity: 0.55; }
   50% { transform: translateX(-50%) scaleX(1.05); opacity: 0.9; }
+}
+
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0) scaleX(1); }
+  50% { transform: translateY(-4px) scaleX(1.03); }
 }
 
 @keyframes sway {
@@ -922,6 +1107,11 @@ h2 {
     height: 600px;
   }
 
+  .floating-badge {
+    right: 12px;
+    bottom: 176px;
+  }
+
   .coupon {
     grid-template-columns: 82px 1fr;
   }
@@ -985,44 +1175,69 @@ h2 {
         </div>
 
         <div class="scene">
+          <div class="scene-depth"></div>
           <div class="sun-core"></div>
           <div class="sun-aura"></div>
+          <div class="sun-rays"></div>
           <div class="cloud cloud--one"></div>
           <div class="cloud cloud--two"></div>
+          <div class="sea-haze"></div>
+          <div class="distant-island distant-island--left"></div>
+          <div class="distant-island distant-island--right"></div>
           <div class="far-jungle"></div>
           <div class="mid-jungle"></div>
           <div class="lagoon"></div>
+          <div class="wave-band wave-band--one"></div>
+          <div class="wave-band wave-band--two"></div>
           <div class="shore"></div>
           <div class="reflection"></div>
+          <div class="foreground-shadow"></div>
           <div class="palm palm--left">
             <span class="trunk"></span>
+            <span class="crown"></span>
             <span class="leaf leaf-1"></span>
             <span class="leaf leaf-2"></span>
             <span class="leaf leaf-3"></span>
             <span class="leaf leaf-4"></span>
             <span class="leaf leaf-5"></span>
+            <span class="leaf leaf-6"></span>
+            <span class="leaf leaf-7"></span>
+            <span class="coconut-cluster"></span>
           </div>
           <div class="palm palm--center">
             <span class="trunk"></span>
+            <span class="crown"></span>
             <span class="leaf leaf-1"></span>
             <span class="leaf leaf-2"></span>
             <span class="leaf leaf-3"></span>
             <span class="leaf leaf-4"></span>
             <span class="leaf leaf-5"></span>
+            <span class="leaf leaf-6"></span>
+            <span class="leaf leaf-7"></span>
+            <span class="coconut-cluster"></span>
           </div>
           <div class="palm palm--right">
             <span class="trunk"></span>
+            <span class="crown"></span>
             <span class="leaf leaf-1"></span>
             <span class="leaf leaf-2"></span>
             <span class="leaf leaf-3"></span>
             <span class="leaf leaf-4"></span>
             <span class="leaf leaf-5"></span>
+            <span class="leaf leaf-6"></span>
+            <span class="leaf leaf-7"></span>
+            <span class="coconut-cluster"></span>
           </div>
 
           <div class="floating-card origin-card">
             <p>批次溯源动画</p>
             <strong>泰国春蓬府椰林 · 海风灌溉产区</strong>
             <span>采收批次：TH-COCO-2026-031 · 鲜采直灌锁鲜</span>
+          </div>
+
+          <div class="floating-badge batch-badge">
+            <span>AR 批次识别</span>
+            <strong>椰青鲜采 · 海运冷链直达</strong>
           </div>
 
           <div class="scan-reticle"></div>
@@ -1128,18 +1343,18 @@ function startExperience() {
   experiencePanel.classList.add("hidden");
   couponStack.classList.add("hidden");
   couponStack.classList.remove("is-visible");
-  statusText.textContent = "正在载入泰国椰林、海风水面与采收批次信息...";
+  statusText.textContent = "正在载入泰国椰林海岸、海水反光与阳光批次场景...";
 
   setIntroCountdown();
 
   schedule(() => {
     introPanel.classList.add("hidden");
     experiencePanel.classList.remove("hidden");
-    statusText.textContent = "已识别商品批次，正在展开泰国椰林实景动画...";
+    statusText.textContent = "已识别商品批次，正在展开泰国海岸椰林实景动画...";
   }, 2200);
 
   schedule(() => {
-    statusText.textContent = "海风、水面反射与椰林层次已完成渲染。";
+    statusText.textContent = "阳光、海面反射与立体椰树层次已完成渲染。";
   }, 3900);
 
   schedule(() => {
