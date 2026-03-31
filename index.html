@@ -661,8 +661,24 @@ h2 {
   padding: 10px 12px;
   border-radius: 16px;
   box-shadow: 0 10px 24px rgba(22, 54, 50, 0.08);
+  position: relative;
   transform: translateY(18px);
   opacity: 0;
+}
+
+.coupon::after {
+  content: "";
+  position: absolute;
+  right: 66px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  border-right: 1px dashed rgba(255, 255, 255, 0.26);
+  opacity: 0.45;
+}
+
+.coupon--locked::after {
+  border-right-color: rgba(111, 118, 125, 0.2);
 }
 
 .coupon-stack.is-visible .coupon {
@@ -713,6 +729,22 @@ h2 {
   min-width: 0;
 }
 
+.coupon-subhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.88;
+}
+
+.coupon-brand,
+.coupon-code {
+  white-space: nowrap;
+}
+
 .coupon-title-row {
   display: flex;
   align-items: center;
@@ -750,11 +782,13 @@ h2 {
 .coupon-tag--active {
   background: rgba(255, 255, 255, 0.95);
   color: var(--orange-deep);
+  box-shadow: inset 0 0 0 1px rgba(240, 154, 20, 0.14);
 }
 
 .coupon-tag--locked {
   background: rgba(111, 118, 125, 0.18);
   color: #61686f;
+  box-shadow: inset 0 0 0 1px rgba(111, 118, 125, 0.1);
 }
 
 .cta-row {
@@ -903,10 +937,10 @@ h2 {
     <main class="shell">
       <section class="panel panel--intro" id="introPanel">
         <div class="brand-pill">METRO · NFC 椰子水</div>
-        <p class="eyebrow">AR 溯源演示</p>
-        <h1>已识别货架 AR 码，正在进入泰国椰林原产地</h1>
+        <p class="eyebrow">扫码溯源 · 限时领券</p>
+        <h1>一瓶椰子水，带你走进泰国椰林原产地</h1>
         <p class="lead">
-          页面将自动展开溯源动画，并在场景稳定后自动弹出优惠券结果。
+          扫码后自动展开原产地动画，并同步下发麦德龙椰子水专享优惠券。
         </p>
 
         <div class="product-card">
@@ -929,14 +963,14 @@ h2 {
               <strong>泰国 · 香水椰种植带</strong>
             </div>
             <div class="origin-line">
-              <span>当前流程</span>
-              <strong>自动播放椰林动画 · 自动下发优惠券</strong>
+              <span>限时福利</span>
+              <strong>自动播放椰林动画 · 自动弹出双券结果</strong>
             </div>
           </div>
         </div>
 
         <div class="countdown-card">
-          <span class="countdown-label">自动进入中</span>
+          <span class="countdown-label">原产地场景即将开启</span>
           <strong id="countdownText">2 秒</strong>
         </div>
       </section>
@@ -1012,6 +1046,10 @@ h2 {
               <span>椰水专享</span>
             </div>
             <div class="coupon-copy">
+              <div class="coupon-subhead">
+                <span class="coupon-brand">麦德龙福利券</span>
+                <span class="coupon-code">NO. MTR-COCO-01</span>
+              </div>
               <div class="coupon-title-row">
                 <h3>麦德龙椰子水专享立减券</h3>
                 <span class="coupon-tag coupon-tag--active">使用</span>
@@ -1026,6 +1064,10 @@ h2 {
               <span>待激活</span>
             </div>
             <div class="coupon-copy">
+              <div class="coupon-subhead">
+                <span class="coupon-brand">麦德龙福利券</span>
+                <span class="coupon-code">NO. MTR-COCO-02</span>
+              </div>
               <div class="coupon-title-row">
                 <h3>麦德龙椰子水赠饮券</h3>
                 <span class="coupon-tag coupon-tag--locked">使用</span>
